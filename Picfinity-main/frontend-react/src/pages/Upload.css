@@ -1,4 +1,6 @@
-.h_body {
+git add .
+git rebase --continue
+git push -u origin main.h_body {
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     font-family: sans-serif;
     margin: 0;
