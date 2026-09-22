@@ -1,144 +1,191 @@
-.profile-page-wrapper {
-  min-height: 100vh;
-  background-color: #0b0f19;
-  color: #f8fafc;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+#k_profile-bg{
+    /* height: vh; */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* background: hsl(0, 0%, 80%); */
+
+    font-size: 1.3em;
 }
 
-.profile-container {
-  max-width: 1440px;
-  margin: 40px auto 80px;
-  padding: 0 24px;
+#k_profile-photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0vh 2vh 0;
+    border: 2px solid rebeccapurple;
+    /* background: rgba(197, 130, 28, 0.598); */
+    background: #FFCA2C;
+    height: 137px;
+    width: 137px;
+    border-radius: 50%;
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;;
+    font-size: 4em;
+    font-weight: 600;
 }
 
-.profile-header-card {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  background: rgba(30, 41, 59, 0.5);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 32px;
-  margin-bottom: 32px;
-  position: relative;
-  flex-wrap: wrap;
+#k_profile-username{
+    margin: 1vh;
+    font-family: "Merriweather Sans", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.8em;
 }
 
-.profile-avatar-large {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #a855f7, #3b82f6);
-  color: #ffffff;
-  font-size: 36px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
-  border: 3px solid rgba(255, 255, 255, 0.15);
+#k_change{
+    /* margin: ; */
+}
+#k_change button {
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background: hsl(0, 0%, 89%);
+}
+#k_change button:hover {
+    background: hsl(0, 0%, 78%);
 }
 
-.profile-details {
-  flex: 1;
+#k_operate{
+    padding: 1.5vh 0.3vh 0.5vh;
 }
 
-.profile-name {
-  font-size: 26px;
-  font-weight: 800;
-  margin: 0 0 4px 0;
-  color: #ffffff;
+#k_operate a{
+    text-decoration: none;
+    color: black;
+    margin: .7vh;
+    padding: 5px;
+}
+#k_operate a:hover{
+    background: hsl(0, 0%, 89%);
+    text-decoration: underline;
+    border-radius: 4px;
+}
+#k_profile-logout{
+    /* background-color: rgba(197, 130, 28, 0.598);; */
+    background-color: #FFCA2C;
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    /* background: hsl(0, 0%, 89%); */
+}
+#k_profile-logout:hover{
+    background: hsl(0, 0%, 78%);
+}
+#k_created{
+    cursor: pointer;
 }
 
-.profile-email {
-  font-size: 14px;
-  color: #94a3b8;
-  margin: 0 0 16px 0;
+/* here is part of css which is taken from home.css - frontend */
+/* i don't think that much big css is reuired */
+
+.k_k_homepage-photo-gallery {
+    /* height: calc(100vh - 75px); */
+    /* margin-top: 50px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+}
+.k_k_homepage-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
+    gap: 1.25rem;
+    padding: 0.625rem;
+    width: 100%;
+}
+.k_k_photo-of-photo-gallery {
+    width: 100%;
+    border: 2px solid rgb(238, 112, 15);
+    height: 30rem;
+    border-radius: 1rem;
+    display: block;
+    background-color: rgba(0, 0, 0, 0); /* Initial transparency */
+    transition: background-color 0.3s ease;
 }
 
-.profile-stats-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.k_k_for-overlay-effect {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 80%;
+    border-radius: 1rem;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
+.k_k_photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0); /* Initial transparency */
+    transition: background-color 0.3s ease;
+    border-radius: 1rem;
 }
 
-.stat-number {
-  font-size: 20px;
-  font-weight: 800;
-  color: #38bdf8;
+.k_k_for-overlay-effect:hover .photo-overlay {
+    background-color: rgba(0, 0, 0, 0.3); /* Black with more opacity on hover */
 }
 
-.stat-label {
-  font-size: 12px;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
+
+
+.k_k_photo-of-photo-gallery img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: block;
+    transition: opacity 0.3s ease; /* Smooth transition for the image */
 }
 
-.stat-divider {
-  width: 1px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.1);
+.k_k_save-button {
+    display: none; 
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    background-color: #f27210; 
+    color: white;
+    border: none;
+    width: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 1.5rem;
+    z-index: 10; 
 }
 
-.profile-actions-top {
-  margin-left: auto;
+.k_k_for-overlay-effect:hover .save-button {
+    display: block; 
 }
 
-.btn-logout {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.k_k_content{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
 }
-
-.btn-logout:hover {
-  background: #ef4444;
-  color: #ffffff;
+.k_k_content > * {
+    margin: 0;
+    padding : 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1; /* Number of lines to show */
+    text-overflow: ellipsis;
 }
-
-/* Tabs */
-.profile-tabs {
-  display: flex;
-  gap: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 12px;
-  margin-bottom: 28px;
-}
-
-.profile-tab-btn {
-  background: none;
-  border: none;
-  color: #94a3b8;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.profile-tab-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.profile-tab-btn.active {
-  color: #a855f7;
-  background: rgba(168, 85, 247, 0.12);
-}
-
-.profile-gallery-section {
-  min-height: 300px;
+#k_k_category{
+    align-items: center;
 }

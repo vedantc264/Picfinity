@@ -1,154 +1,200 @@
-.auth-page-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #0b0f19;
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.12) 0px, transparent 50%);
-  padding: 24px;
+body{
+    margin: 0;
+    padding: 0;
+    
+}
+.k_k_login-page{
+    /* background-color: hsl(0, 0%, 15%); */
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    /* border: 2px solid black; */
+    border-radius: 25px;
+}
+#k_k_img-nature{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.87);
+    border-radius: 15px 0 0 15px;
 }
 
-.auth-card {
-  width: 100%;
-  max-width: 440px;
-  background: rgba(30, 41, 59, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px 32px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+#k_k_nature-img{
+    height: 78.7vh;
+    width: 37vw;
+    background-size: contain;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 15px 0 0 15px;
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 28px;
+.k_k_overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.17);
+    border-radius: 15px 0 0 15px;
 }
 
-.auth-brand-logo {
-  font-size: 26px;
-  font-weight: 800;
-  text-decoration: none;
-  background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  margin-bottom: 12px;
+#k_k_login{
+    display: flex;
+    flex-direction: column; 
+    /* justify-content: center; */
+    align-items: center;
+    width: 45vw;
+    height: 78.8vh;
+    background-color: hsl(0, 0%, 10%);
+    /* border: 2px solid black; */
+    z-index: 99;
+    border-radius: 0px 15px 15px 0px ;
 }
 
-.auth-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: #f8fafc;
-  margin: 0 0 6px 0;
+#k_k_logo{
+    width: 15vw;
+    /* height: 15vh; */
+    background-size: contain;
+    /* margin-bottom: 50px; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    /* position: relative;
+    top: -80px; */
+    /* border: 20px solid black; */
+
+}
+.k_k_cred{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.auth-subtitle {
-  font-size: 13px;
-  color: #94a3b8;
-  margin: 0;
+input{
+    width: 20vw;
+    font-size: 1.1em;
+    background-color: hsl(0, 0%, 0%);
+    color: azure;
+    border: none;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+}
+#k_k_forget{
+    color: hsl(180, 3%, 85%);
+    cursor: pointer;
+    padding: 5px 0 10px 0;
+    text-align: right;
+    width: 22vw;
+    font-size: 1.1em;
+}
+#k_k_submit{
+    width: 10vw;
+    background-color: hsl(184, 100%, 45%);
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
+#k_k_submit:hover{
+    background-color: hsl(184, 100%, 55%);
 }
 
-.label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+#k_k_submit:active{
+    background-color: hsl(184, 70%, 60%);
+    color: hsl(0, 0%, 5%);
 }
 
-.label-row .form-label {
-  margin-bottom: 0;
+#k_k_forget:hover{
+    color: hsl(180, 3%, 99%);
 }
 
-.btn-toggle-pass {
-  background: none;
-  border: none;
-  color: #a855f7;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
+#k_k_sign-up{
+    color: hsl(180, 17%, 92%);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-decoration: none;
+    text-decoration-color: white;
 }
-
-.btn-toggle-pass:hover {
-  text-decoration: underline;
+#k_k_sign-up:hover{
+    color: hsl(180, 3%, 99%);
 }
-
-.btn-auth-submit {
-  width: 100%;
-  padding: 13px;
-  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
-  color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35);
-  transition: all 0.25s ease;
-  margin-top: 10px;
+#s_login{
+    text-decoration: none;
 }
+@media screen and (max-width: 1000px){
+    
+    #k_k_nature-img{
+        display: none;
+    }
+    #k_k_login{
+        width: 70vw;
+        /* font-size: 1.2em; */
+        border-radius: 15px;
+    }
 
-.btn-auth-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+    input{
+        width: 45vw;
+        font-size: 1.1em;
+    }
+    #k_k_forget{
+        width: 45vw;
+    }
+    #k_k_logo{
+        margin: 0;
+        width: 36vw;
+        height: 33vh;
+    }
+    #k_k_submit{
+        width: 20vw;
+    }
+    
 }
+@media screen and (max-width: 600px){
+    
+    #k_k_nature-img{
+        display: none;
+    }
+    #k_k_login{
+        width:280px;
+        height: 460px;
+        border-radius: 15px;
+    }
+    input{
+        width: 200px;
+        /* border: 20px solid white; */
+    }
+    #k_k_forget{
+        width: 100px;
+        margin-left: 0px;
+        /* border: 2px soli d black; */
+        padding-right: 30px;
+    }
+    #k_k_submit{
+        width: 90px;
+        border: 2px solid black;
+         
+    }
+    #k_k_email{
+        width: 220px;
 
-.btn-auth-submit:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-demo-creds {
-  margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: #cbd5e1;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-demo-creds:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.auth-footer {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 13px;
-  color: #94a3b8;
-}
-
-.auth-link {
-  color: #a855f7;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-
-.auth-link-muted {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 12px;
-}
-
-.auth-link-muted:hover {
-  color: #cbd5e1;
+    }
+    #s_login{
+        text-decoration: none;
+    }
+    #k_k_password{
+        width: 220px;
+    }
+    #k_k_forget{
+        width: 60vw;
+    }
+    #k_k_logo{
+        width: 150px;
+        width: 150px;
+        border-radius: 15px;
+    }
+    
 }

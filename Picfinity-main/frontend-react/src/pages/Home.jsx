@@ -1,138 +1,94 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import Navbar from '../components/Navbar';
-import Slider from '../components/Slider';
-import PhotoCard from '../components/PhotoCard';
-import api from '../services/api';
-import './Home.css';
+import React, { useEffect, useState } from 'react'
+import Navbar from '../components/Navbar'
+import "./Home.css"
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
+import handleButtonOnClick from '../components/handleButtonOnClick'
+import { loggedInSelector } from '../store/user'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import Slider from '../components/Slider'
+import { photoState } from '../store/photo'
+import { Link } from 'react-router-dom'
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const SERVER_BASE = API_BASE.replace(/\/api\/?$/, '');
+
+const resolveImageUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+  return `${SERVER_BASE}${url.startsWith('/') ? url : '/' + url}`;
+};
 
 const Home = () => {
   const [photos, setPhotos] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+  const loggedIn = useRecoilValue(loggedInSelector);
+  const navigate = useNavigate();
+  const photoS = useRecoilValue(photoState);
+  const setPhotoS = useSetRecoilState(photoState);
 
   useEffect(() => {
-    async function fetchPhotos() {
+    async function getAllPhotos() {
       try {
-        setLoading(true);
-        const response = await api.get('/photo/getAllPhotosUnprotected');
+        const response = await axios.get(`${API_BASE}/photo/getAllPhotosUnprotected`);
         if (response.data.photos) {
-          setPhotos(response.data.photos);
+          const ph = response.data.photos;
+          let p = [];
+          for (var i = response.data.photos.length - 1; i >= 0; i--) {
+            p.push(ph[i]);
+          }
+          setPhotos(p);
         }
-      } catch (error) {
-        console.error('Error fetching photos:', error);
-      } finally {
-        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching photos:', err);
       }
     }
-    fetchPhotos();
+    getAllPhotos();
   }, []);
 
-  const filteredPhotos = useMemo(() => {
-    return photos.filter((photo) => {
-      const matchesSearch =
-        !searchQuery ||
-        photo.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.category?.toLowerCase().includes(searchQuery.toLowerCase());
+  useEffect(() => {
+    setPhotoS(photos);
+  }, [photos]);
 
-      const matchesCategory =
-        selectedCategory === 'All' ||
-        photo.category?.toLowerCase() === selectedCategory.toLowerCase();
-
-      return matchesSearch && matchesCategory;
-    });
-  }, [photos, searchQuery, selectedCategory]);
+  useEffect(() => {
+    async function getAllCategories() {
+      try {
+        const response = await axios.get(`${API_BASE}/photo/getAllCategories`);
+        if (response.data.categories) {
+          setCategories(response.data.categories);
+        }
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+      }
+    }
+    getAllCategories();
+  }, []);
 
   return (
-    <div className="home-page-container">
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="hero-banner">
-        <div className="hero-glow hero-glow-1"></div>
-        <div className="hero-glow hero-glow-2"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">
-            Discover & Share <span className="text-gradient">Infinite Visuals</span>
-          </h1>
-          <p className="hero-subtitle">
-            Explore thousands of curated, high-resolution photographs, designs, and artworks.
-          </p>
-
-          <div className="hero-search-box">
-            <span className="search-icon">🔍</span>
-            <input
-              type="text"
-              placeholder="Search by title, description, or category (e.g. Nature, Cars)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="hero-search-input"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                className="clear-search-btn"
-                onClick={() => setSearchQuery('')}
-              >
-                ✕
-              </button>
-            )}
-          </div>
+    <>
+      <Navbar></Navbar>
+      <div className="heading-on-homepage"><h1>Find a category</h1></div>
+      <Slider></Slider>
+      <div className="h_message"><h4>Explore</h4></div>
+      <div className='homepage-photo-gallery'>
+        <div className='homepage-photo-grid' id='homepage-photo-grid'>
+          {photos ? photos.map((photo) => {
+            const id = photo.photoId || photo.id;
+            return (
+              <div className='photo-of-photo-gallery' key={id}>
+                <div className='for-overlay-effect'>
+                  <img src={resolveImageUrl(photo.photo_url)} alt=""/>
+                  <button type='button' className='save-button' onClick={() => handleButtonOnClick(id, loggedIn, localStorage.getItem('token'))}>save</button>
+                  <Link to={`/photo/${id}`}><div className='photo-overlay'></div></Link>
+                </div>
+              </div>
+            )
+          }) : <></>}
         </div>
-      </section>
-
-      {/* Category Pills Slider */}
-      <Slider
-        activeCategory={selectedCategory}
-        onSelectCategory={(cat) => setSelectedCategory(cat)}
-      />
-
-      {/* Photo Gallery Grid */}
-      <main className="gallery-section">
-        <div className="gallery-header">
-          <h2 className="section-title">
-            {selectedCategory === 'All' ? 'Trending Photography' : `${selectedCategory} Collection`}
-            <span className="photo-count-badge">
-              {filteredPhotos.length} {filteredPhotos.length === 1 ? 'photo' : 'photos'}
-            </span>
-          </h2>
-        </div>
-
-        {loading ? (
-          <div className="masonry-loading-grid">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="photo-skeleton-card"></div>
-            ))}
-          </div>
-        ) : filteredPhotos.length === 0 ? (
-          <div className="empty-state-box">
-            <div className="empty-icon">📷</div>
-            <h3>No photos found</h3>
-            <p>Try searching for a different keyword or selecting another category.</p>
-            {(searchQuery || selectedCategory !== 'All') && (
-              <button
-                type="button"
-                className="btn-reset-filters"
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('All');
-                }}
-              >
-                Reset Filters
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="masonry-gallery-grid">
-            {filteredPhotos.map((photo) => (
-              <PhotoCard key={photo.photoId || photo.id} photo={photo} />
-            ))}
-          </div>
-        )}
-      </main>
-    </div>
-  );
-};
+      </div>
+    </>
+  )
+}
 
 export default Home;

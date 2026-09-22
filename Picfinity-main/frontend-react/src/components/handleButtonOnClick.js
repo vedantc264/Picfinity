@@ -1,34 +1,34 @@
-
-
 import axios from "axios";
 
-export default async function handleButtonOnClick(photo_id , loggedIn ,token){
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+
+export default async function handleButtonOnClick(photo_id, loggedIn, token) {
     console.log("handle button clicked");
-    if(!loggedIn)
-    {
-        // window.location.href = "/login";
-        alert("please login first")
+    if (!loggedIn) {
+        alert("please login first");
+        return;
     }
     console.log(photo_id);
     console.log(token);
-    const response = await axios.post("https://ieee-hackathon-2024-codecrafters-1.onrender.com/api/photo/saveAPhoto",{
-       
-    },{
-        headers:{
-            "Content-Type":"application/json",
-            "token" : token,
-            photo_id : photo_id
+    try {
+        const response = await axios.post(`${API_BASE}/photo/saveAPhoto`, {
+            photo_id: photo_id
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+                "token": token,
+                photo_id: photo_id
+            }
+        });
+        console.log(response.data);
+
+        if (response.data.Api_Response == 323) {
+            alert("photo is already saved");
+        } else if (response.data.saved) {
+            alert("photo saved");
         }
-    });
-    console.log(response.data)
-    
-    if(response.data.Api_Response==323)
-    {
-        alert("photo is already saved");
+    } catch (err) {
+        console.error("Error saving photo:", err);
+        alert(err.response?.data?.message || "Error saving photo");
     }
-    else if(response.data.saved)
-    {
-        alert("photo saved")
-    }
-    
 }
